@@ -1,6 +1,6 @@
 ---
 layout: post
-title: cpu ve bellek bilgisinizi öğrenin
+title: cpu ve bellek bilgisini öğrenin
 ---
 
 koşun hemen konsola gidin ve test edin

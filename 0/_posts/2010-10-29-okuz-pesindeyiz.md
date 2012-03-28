@@ -8,5 +8,5 @@ işte o öküz
 
 
 
-![oyak-okuz](/images/oyak-okuz.png)
+![oyak-okuz](https://github.com/00010011/art/raw/master/art/oyak/oyak-normal-640x640.png)
 
