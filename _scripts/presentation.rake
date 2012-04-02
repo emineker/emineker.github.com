@@ -219,9 +219,9 @@ presentation.each do |presentation, data|
       chdir presentation do
         %x(landslide -i #{data[:conffile]})
         # XXX: Slayt bağlamı iOS tarayıcılarında sorun çıkarıyor.  Kirli bir çözüm!
-        cmd=%q[
-          sed -i -e "s/^\([[:blank:]]*var hiddenContext *= *\)false\(;[[:blank:]]*$\)/\1true\2/" presentation.html
-        ]; %x(#{cmd})
+        # cmd=%q[
+        #   sed -i -e "s/^\([[:blank:]]*var hiddenContext *= *\)false\(;[[:blank:]]*$\)/\1true\2/" presentation.html
+        # ]; %x(#{cmd})
         unless data[:basename] == 'presentation.html'
           mv 'presentation.html', data[:basename]
         end
@@ -236,8 +236,8 @@ presentation.each do |presentation, data|
           --url=file://#{File.absolute_path(data[:target])}#slide1 \
           --out=#{data[:thumbnail]} \
           --user-style-string='div.slides { width: 900px; overflow: hidden; }' \
-          --min-width=1024 \
-          --min-height=768 \
+          --min-width=960 \
+          --min-height=720 \
           --delay=1000
       )
       %x(mogrify -resize 240 #{data[:thumbnail]})
