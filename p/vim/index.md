@@ -12,6 +12,7 @@ Eylül 2011
 
 ---
 
+
 # Linux Sistem Yönetimi & Text Editörler
 
 - Her ne kadar linux sunucularda sistemin ve servislerin yönetimi için çeşitli yönetim arayüzleri geliştirilse de bu grafik arayüzlerin hem sayısı az hemde yetenekleri kısıtlıdır
@@ -21,6 +22,7 @@ Eylül 2011
 Linux sistem yöneticiliğinde, text editörlerine işte bu noktada oldukça ihtiyaç duyulur.
 
 ---
+
 
 # Text Editörlerinin Padişahı: Vim
 
@@ -33,10 +35,12 @@ Linux sistem yöneticiliğinde, text editörlerine işte bu noktada oldukça iht
 
 - Vi ile Vim arasındaki farklar sistemdeki /usr/share/vim/vim73/doc/vi_diff.txt dosyasında mevcuttur
 
+        !sh
         $ cat /usr/share/vim/vim63/doc/vi_diff.txt
 komutu ile dosya içeriğini görebilirsiniz
 
 ---
+
 
 # Neden Vim?
 
@@ -49,6 +53,7 @@ Unix geleneklerine sahip olan Vim özellikle linux sistem yöneticileri ve progr
 Unix tabanlı hemen hemen her sistemde bulunur.
 
 ---
+
 
 # Vim’in Temel Özellikleri
 
@@ -64,6 +69,7 @@ Vim’in bu gibi temel özellikleri ile kendisini diğer editörlerden oldukça 
 
 ---
 
+
 # Örnek Bir Çalışma Anı
 
 - otomatik indent
@@ -75,6 +81,7 @@ Vim’in bu gibi temel özellikleri ile kendisini diğer editörlerden oldukça 
 ![vim](media/split.gif)
 
 ---
+
 
 # Ayrıntı!
 
@@ -90,6 +97,7 @@ Vim’in bu gibi temel özellikleri ile kendisini diğer editörlerden oldukça 
 
 ---
 
+
 # Vim Metin Editörünü Edinin
 
 - Daha önce de söylediğimiz gibi vim unix geleneklerine sahip bir metin editörüdür.
@@ -97,11 +105,13 @@ Vim’in bu gibi temel özellikleri ile kendisini diğer editörlerden oldukça 
 
 Terminale gidelim ve bu komutu girelim:
 
+    !sh
     $ sudo apt-get install vim
 
 Vim editörünü linux dağıtımımıza yüklemiş olduk
 
 ---
+
 
 # Vim’e Nasıl Ulaşılır ?
 
@@ -109,11 +119,13 @@ Vim editörünü linux dağıtımımıza yüklemiş olduk
 
 Konsoldan Vim’e
 
-        $ vim
+    !sh
+    $ vim
 
 ve
 
-        $ vi
+    !sh
+    $ vi
 
 şeklinde ulaşabiliyoruz
 
@@ -124,6 +136,7 @@ Ama yanlış anlaşılmasın biraz önceki vi komutuyla vi metin editörünü ç
 vi burada bir alias görevinde. vi de bizi vim’e götürecek.
 
 ---
+
 
 # Vim Kullanımına Giriş
 
@@ -143,25 +156,30 @@ Vim’in escape, insert ve command olmak üzere üç modu vardır.
 
 ---
 
+
 # Vim ile Zorunlu Hareketler 1
 
 ## Dosya açmak
 
-        $ vim index.html
+    !sh
+    $ vim index.html
 
 ile bulunduğumuz dizinde index.html adında bir dosya açtık.
 
 Dosya adını belirtmeden yine terminalden
 
-        $ vim
+    !sh
+    $ vim
 
 ile programa giriş yapıp escape modunda
 
-        :w index.html
+    !sh
+    :w index.html
 
 yazarak da dosyamızı index.html olarak kaydetmiş oluyoruz.
 
 ---
+
 
 # Vim ile Zorunlu Hareketler 2
 
@@ -182,6 +200,7 @@ NOT: eğer değişiklik yaptıktan sonra bu komutu verirsek dosyada değişiklik
 
 ---
 
+
 # Yön Tuşlarını Kullanmak
 
 İmleç tuşları yani klavyemizin yöntuşlarıyla dosya içerisinde ileri-geri  veya sağ-sol yaparak ilerleyebiliriz.
@@ -196,6 +215,7 @@ Ancak bu görevi yapan `hjkl` tuşlarını kullanmaya alışırsak editör içer
 tabi ki bu işlemlerin hepsi yine escape modda yapılabilir.
 
 ---
+
 
 # Dosya İçerisinde Kopyala-Yapıştır
 
@@ -222,6 +242,7 @@ Kopyaladığımız veya kestiğimiz satırları yapıştırmak için ise yapış
 - üzerinde bulunduğumuz satırın bir üzerindeki satıra yapıştırmak için ise büyük P tuşuna basalım (shift + p)
 
 ---
+
 
 # Visual Mod
 
@@ -251,25 +272,29 @@ seçtiğimiz kısmı olduğu gibi yapıştırabiliriz.
 
 ---
 
+
 # Visual-Block Mod
 
 Visual-Block modun Visual moddan farkı blok seçim yapabilmesidir.
 
 Hemen bir önceki sayfadaki kod üzerinde deneme yapalım.
 
-- kod üzerine gelip ctrl + v tuş kombinasyonuyla visual-block moduna geçelim
-- arkasından visual moddaki gibi seçim yapalım
+- Kod üzerine gelip ctrl + v tuş kombinasyonuyla visual-block moduna geçelim
+- Arkasından visual moddaki gibi seçim yapalım
 
-`Burda görmemiz gereken farklılık visual moddaki birden fazla satır seçebilme durumumuzdur`
+        burda görmemiz gereken farklılık
+        visual moddaki birden fazla satır
+        block halinde seçebilme durumumuzdur
 
 - Visual mod seçeceğimiz satırların tümünü seçmemizi sağlıyordu
 - Visual-block mod ise bize istediğimiz bir grup satırın istediğimiz kısımlarını seçmemizi sağlar
 
 ---
 
+
 # Dosya Üzerinde Silme ve Geri Alma
 
-### silme
+### Silme
 
 - Escape modunda iken delete tuşu ile harf harf silebiliriz.
 - Aynı şekilde yine karakter karakter silmek için x tuşu kullanılabilir be kullanılmalıdır.
@@ -277,38 +302,22 @@ Hemen bir önceki sayfadaki kod üzerinde deneme yapalım.
 - dd tuşları ile de seçtiğimiz kısmı veya üzerinde bulunduğumuz satırı keserek de ordan kaldırmış oluruz.
 
 
-### geri alma
+### Geri alma
 
 sadece silme işlemlerinde değil kopyalama, yapıştırma, kesme gibi bir çok işlemi geri almak istediğinizde
 
-- önce escape moduna geçip
-- arkasından command modda
+- Önce escape moduna geçip
+- Arkasından command modda
 
+        !sh
         :u
 ile en son işleminizi geri alıp dosyanızı bir işlem önceki haline getirebilirsiniz.
 
 ---
-18
+
 
 # Devamı gelecek
 
 daha yeni başladık
-
----
-
-# 19 Organizasyonu
-
-## [19 Organizasyonu](http://ondokuz.biz)
-
-[http://emineker.net/](http://emineker.net/)
-
-**Sunum hakkında ayrıntılı bilgi almak için** [http://ondokuz.biz/p](http://ondokuz.biz/perde/) adresini ziyaret edebilirsiniz.
-
-![19](media/19.png)
-
-
-
-
-
 
 

@@ -24,7 +24,9 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta id="viewport" name="viewport" content="user-scalable=no" />
     <title>Vim</title>
     <!-- Styles -->
     
@@ -295,13 +297,16 @@ a {
   border-bottom: 2px solid #3f3f3f;
 }
 
+pre, code, tt {
+  font-family: Monaco, Consolas, 'Bitstream Vera Sans Mono', 'Lucida Console', FreeMono, Courier, monospace;
+}
+
 pre, .gist .gist-file .gist-data {
-  font-size: 16px;
-  font-family: Monaco, 'Bitstream Vera Sans Mono', 'Lucida Console', FreeMono, Courier, monospace;
+  font-size: 18px;
   max-height: 485px;
   padding-top: 0.25em !important;
   padding-right: 0.5em !important;
-  padding-left: 2.5em !important;
+  padding-left: 0.5em !important;
   overflow: auto;
 }
 
@@ -508,6 +513,70 @@ body.expose .slide.current {
   -o-transform-origin: 0 0;
 }
 
+/* Navigator */
+
+nav {
+  position: fixed;
+  z-index: 10;
+  background-color: black;
+  opacity: 0.0;
+  text-align: center;
+  top: 1%;
+  width: 100px;
+  height: 98%;
+}
+nav:hover, nav.hover {
+  opacity: 0.4;
+}
+
+nav#left {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  left: 0;
+}
+nav#right {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  right: 0;
+}
+
+nav menu {
+  padding: 0;
+  display: block;
+  height: 40%;
+  width: inherit;
+  position: fixed;
+}
+nav menu#top {
+  top: 5%;
+}
+nav menu#bottom {
+  top: auto;
+  bottom: 3%;
+}
+
+nav menu button {
+  background-color: #222;
+  border: none;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  width: 100%;
+  height: 19%;
+  font-size: 24px;
+  font-family: monospace;
+  margin-top: 1%;
+}
+nav menu button:hover {
+  opacity: 1.0;
+}
+nav menu button#prev, nav menu button#next {
+  margin-top: 0;
+  padding-top: 0;
+  height: 40%;
+  font-size: 40px;
+}
+
 /* Pygments default theme */
 .hll { background-color: #ffffcc }
 .c { color: #408080; font-style: italic } /* Comment */
@@ -687,9 +756,9 @@ div.slide div.presenter_notes {
 ul li {
   list-style: none;
   list-style-type: none;
-  margin-left: -1.5em;
+  margin-left: -26px;
   padding-left: 1em;
-  text-indent: -1.3em;
+  text-indent: -32px;
 }
 ul li pre { text-indent: 0; }
 ul li:before {
@@ -706,29 +775,70 @@ ul li:first {
 li p { display: inline; }
 li pre { margin-left: 2em; }
 
-/*
- * Limit pre area's height and allow using a vertical scrollbar for overflowed
- * content (I think this might be considered as the most appealing reason for
- * using html slides involving codes).
- */
-.gist .gist-file .gist-data pre, pre {
+a {
+  text-decoration: none;
+  color: #1571e1;
+  border: none;
+  display: inline !important;
+}
+
+pre, code, tt {
+  font-family: Monaco, Consolas, 'Bitstream Vera Sans Mono', 'Lucida Console', FreeMono, Courier, monospace;
+}
+
+pre, .gist .gist-file .gist-data {
+  font-size: 18px;
   max-height: 485px;
   padding-top: 0.25em !important;
   padding-right: 0.5em !important;
-  padding-left: 1em !important;
+  padding-left: 0.5em !important;
   overflow: auto;
-  font-family: 'Monaco', 'Bitstream Vera Sans Mono', 'Lucida Console', 'FreeMono', Monospace;
 }
-::-webkit-scrollbar {
-  height: 8px;
-  width: 8px;
+
+code {
+  background: #ffffff;
+  padding: 0.1em;
+  padding-right: 0.15em;
+  border-top-right-radius: 0.2em;
+  -moz-border-radius-topright: 0.2em;
+  -webkit-border-top-right-radius: 0.2em;
+  border-bottom-left-radius: 2px;
+  -moz-border-radius-bottomleft: 0.2em;
+  -webkit-border-bottom-left-radius: 0.2em;
+  border-top-left-radius: 0.2em;
+  -moz-border-radius-topleft: 0.2em;
+  -webkit-border-top-left-radius: 0.2em;
+  border-bottom-right-radius: 0.2em;
+  -moz-border-radius-bottomright: 0.2em;
+  -webkit-border-bottom-right-radius: 0.2em;
 }
+pre, pre code {
+  background: none;
+}
+
+div.slide {
+  background: -webkit-gradient(linear, left bottom, left top, from(#eee), to(#eaeaea));
+  background-color: #eee;
+  background: -moz-linear-gradient(bottom, #eee, #eaeaea);
+  border-top-right-radius: 20px;
+  -moz-border-radius-topright: 20px;
+  -webkit-border-top-right-radius: 20px;
+  border-bottom-left-radius: 2px;
+  -moz-border-radius-bottomleft: 20px;
+  -webkit-border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
+  -moz-border-radius-topleft: 20px;
+  -webkit-border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  -moz-border-radius-bottomright: 20px;
+  -webkit-border-bottom-right-radius: 20px;
+}
+
 ::-webkit-scrollbar-thumb {
-  background: -webkit-gradient(linear, left bottom, left top, from(#9c000d), to(#eeeeee));
-  -webkit-border-radius: 1ex;
+  background: -webkit-gradient(linear, left bottom, left top, from(#9c000d), to(#eee));
 }
-::-webkit-scrollbar-corner {
-  background: #dedede;
+::-webkit-scrollbar-thumb:horizontal { /* no horizontal scrollbar */
+  background: none;
 }
 
 .slide.achtung {
@@ -763,22 +873,17 @@ li pre { margin-left: 2em; }
   -moz-border-radius: 0.15em 0.15em 0.15em 0.15em;
   border-radius: 0.15em 0.15em 0.15em 0.15em;
   height: 80px;
-  font-family: 'Ubuntu Titling', 'Lucida Grande';
 }
 .slide.first section {
   padding-top: 90px;
 }
 
-a {
-  text-decoration: none;
-  color: #1571e1;
-  border: none;
-  display: inline !important;
-}
-
 .section {
   color: black;
 }
+
+/* Pygments */
+.err { border: 0px; }
 
 /* end presentation.css */
 
@@ -798,7 +903,7 @@ a {
     var currentSlideNo;
     var notesOn = false;
     var expanded = false;
-    var hiddenContext = true;
+    var hiddenContext = false;
     var blanked = false;
     var slides = document.getElementsByClassName('slide');
     var touchStartX = 0;
@@ -1191,11 +1296,13 @@ a {
                 break;
             case 37: // left arrow
             case 33: // page up
+                event.preventDefault();
                 prevSlide();
                 break;
             case 39: // right arrow
             case 32: // space
             case 34: // page down
+                event.preventDefault();
                 nextSlide();
                 break;
             case 50: // 2
@@ -1329,6 +1436,51 @@ a {
         }
     };
 
+    var addMenuListeners = function() {
+        var buttons = document.querySelectorAll('button');
+        for (var i = 0; i < buttons.length; i++) {
+            buttons.item(i).addEventListener('click', function(e) {
+                var n = e.target.getAttribute('data-command');
+                switch(n) {
+                case 'toc':
+                    showToc(); break;
+                case 'notes':
+                    showNotes(); break;
+                case 'numbers':
+                    showSlideNumbers(); break;
+                case 'overview':
+                    toggleOverview(); break;
+                case 'context':
+                    toggleContext(); break;
+                case 'blank':
+                    toggleBlank(); break;
+                case 'help':
+                    showHelp(); break;
+                default:
+                    return;
+                }
+            }, true);
+        }
+        var action = {
+            'prev': function(e) { prevSlide() },
+            'next': function(e) { nextSlide() }
+        };
+        for (var name in action) {
+            var buttons = document.querySelectorAll('#' + name);
+            for (var i = 0; i < buttons.length; i++)
+                buttons.item(i).addEventListener('click', action[name], true);
+        }
+
+        if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPod/i)) {
+            var navs = document.getElementsByTagName('nav');
+            for (var i = 0; i < navs.length; i++) {
+                navs.item(i).addEventListener('touchstart', function() {
+                    this.className = (this.className == 'hover') ? '' : 'hover';
+                }, false);
+            }
+        }
+    };
+
     // initialize
 
     (function() {
@@ -1342,6 +1494,11 @@ a {
             addClass(document.body, 'presenter_view');
         } else {
             currentSlideNo = Number(window.location.hash.replace('#slide', ''));
+        }
+
+        // disable context on small screens
+        if (window.screen.availWidth < 1280) {
+            hiddenContext = true;
         }
 
         document.addEventListener('keyup', checkModifierKeyUp, false);
@@ -1360,6 +1517,8 @@ a {
         // add support for finger events (filter it by property detection?)
         addTouchListeners();
 
+        addMenuListeners();
+
         addTocLinksListeners();
 
         addSlideClickListeners();
@@ -1375,6 +1534,33 @@ a {
 </head>
 <body>
   <div id="blank"></div>
+
+  <nav id="left">
+    <menu id="top">
+      <button title="Previous slide" id="prev" class="prev">«</button>
+    </menu>
+    <menu id="bottom">
+      <button type="checkbox" data-command="toc" title="Table of Contents" class="toc">TOC</button>
+      <button type="checkbox" data-command="numbers" title="Show Slide Numbers">#</button>
+      <button type="checkbox" data-command="overview" title="Overview">↻</button>
+      <button type="checkbox" data-command="notes" title="View Slide Notes">✏</button>
+      <button type="checkbox" data-command="help" title="View Help">?</button>
+    </menu>
+  </nav>
+  <nav id="right">
+    <menu id="top">
+      <button title="Next slide" id="next" class="next">»</button>
+    </menu>
+    <div id="blank"></div>
+    <menu id="bottom">
+      <button type="checkbox" data-command="toc" title="Table of Contents" class="toc">TOC</button>
+      <button type="checkbox" data-command="numbers" title="Show Slide Numbers">#</button>
+      <button type="checkbox" data-command="overview" title="Overview">↻</button>
+      <button type="checkbox" data-command="notes" title="View Slide Notes">✏</button>
+      <button type="checkbox" data-command="help" title="View Help">?</button>
+    </menu>
+  </nav>
+
   <div class="presentation">
     <div id="current_presenter_notes">
       <div id="presenter_note"></div>
@@ -1408,7 +1594,7 @@ a {
             </aside>
             
             <aside class="page_number">
-              1/19
+              1/18
             </aside>
           </footer>
         </div>
@@ -1443,7 +1629,7 @@ a {
             </aside>
             
             <aside class="page_number">
-              2/19
+              2/18
             </aside>
           </footer>
         </div>
@@ -1451,7 +1637,7 @@ a {
       
       <!-- slide source: ./index.md -->
       <div class="slide-wrapper">
-        <div class="slide">
+        <div class="slide has_code">
           <div class="inner">
             
             <header><h1>Text Editörlerinin Padişahı: Vim</h1></header>
@@ -1467,8 +1653,9 @@ a {
 </li>
 <li>
 <p>Vi ile Vim arasındaki farklar sistemdeki /usr/share/vim/vim73/doc/vi_diff.txt dosyasında mevcuttur</p>
-<pre><code>$ cat /usr/share/vim/vim63/doc/vi_diff.txt
-</code></pre>
+<div class="highlight"><pre><span class="nv">$ </span>cat /usr/share/vim/vim63/doc/vi_diff.txt
+</pre></div>
+
 <p>komutu ile dosya içeriğini görebilirsiniz</p>
 </li>
 </ul></section>
@@ -1487,7 +1674,7 @@ a {
             </aside>
             
             <aside class="page_number">
-              3/19
+              3/18
             </aside>
           </footer>
         </div>
@@ -1524,7 +1711,7 @@ Unix tabanlı hemen hemen her sistemde bulunur.</p></section>
             </aside>
             
             <aside class="page_number">
-              4/19
+              4/18
             </aside>
           </footer>
         </div>
@@ -1562,7 +1749,7 @@ Unix tabanlı hemen hemen her sistemde bulunur.</p></section>
             </aside>
             
             <aside class="page_number">
-              5/19
+              5/18
             </aside>
           </footer>
         </div>
@@ -1599,7 +1786,7 @@ Unix tabanlı hemen hemen her sistemde bulunur.</p></section>
             </aside>
             
             <aside class="page_number">
-              6/19
+              6/18
             </aside>
           </footer>
         </div>
@@ -1642,7 +1829,7 @@ Unix tabanlı hemen hemen her sistemde bulunur.</p></section>
             </aside>
             
             <aside class="page_number">
-              7/19
+              7/18
             </aside>
           </footer>
         </div>
@@ -1650,7 +1837,7 @@ Unix tabanlı hemen hemen her sistemde bulunur.</p></section>
       
       <!-- slide source: ./index.md -->
       <div class="slide-wrapper">
-        <div class="slide">
+        <div class="slide has_code">
           <div class="inner">
             
             <header><h1>Vim Metin Editörünü Edinin</h1></header>
@@ -1661,8 +1848,9 @@ Unix tabanlı hemen hemen her sistemde bulunur.</p></section>
 <li>Bu yüzden linux dağıtımlarından bu editöre ulaşmak oldukça kolaydır.</li>
 </ul>
 <p>Terminale gidelim ve bu komutu girelim:</p>
-<pre><code>$ sudo apt-get install vim
-</code></pre>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install vim
+</pre></div>
+
 <p>Vim editörünü linux dağıtımımıza yüklemiş olduk</p></section>
             
           </div>
@@ -1679,7 +1867,7 @@ Unix tabanlı hemen hemen her sistemde bulunur.</p></section>
             </aside>
             
             <aside class="page_number">
-              8/19
+              8/18
             </aside>
           </footer>
         </div>
@@ -1687,7 +1875,7 @@ Unix tabanlı hemen hemen her sistemde bulunur.</p></section>
       
       <!-- slide source: ./index.md -->
       <div class="slide-wrapper">
-        <div class="slide">
+        <div class="slide has_code">
           <div class="inner">
             
             <header><h1>Vim’e Nasıl Ulaşılır ?</h1></header>
@@ -1697,11 +1885,13 @@ Unix tabanlı hemen hemen her sistemde bulunur.</p></section>
 <li>Öncelikle Vim’e erişmek için bilindiği gibi terminalden ismi ile çağırıp çalıştırabiliyoruz.</li>
 </ul>
 <p>Konsoldan Vim’e</p>
-<pre><code>    $ vim
-</code></pre>
+<div class="highlight"><pre><span class="nv">$ </span>vim
+</pre></div>
+
 <p>ve</p>
-<pre><code>    $ vi
-</code></pre>
+<div class="highlight"><pre><span class="nv">$ </span>vi
+</pre></div>
+
 <p>şeklinde ulaşabiliyoruz</p>
 <p>Vim’in Vi’in geliştirilmiş hali olduğunu söylemiştik.</p>
 <p>Ama yanlış anlaşılmasın biraz önceki vi komutuyla vi metin editörünü çağırmadık.</p>
@@ -1721,7 +1911,7 @@ Unix tabanlı hemen hemen her sistemde bulunur.</p></section>
             </aside>
             
             <aside class="page_number">
-              9/19
+              9/18
             </aside>
           </footer>
         </div>
@@ -1765,7 +1955,7 @@ Unix tabanlı hemen hemen her sistemde bulunur.</p></section>
             </aside>
             
             <aside class="page_number">
-              10/19
+              10/18
             </aside>
           </footer>
         </div>
@@ -1773,22 +1963,25 @@ Unix tabanlı hemen hemen her sistemde bulunur.</p></section>
       
       <!-- slide source: ./index.md -->
       <div class="slide-wrapper">
-        <div class="slide">
+        <div class="slide has_code">
           <div class="inner">
             
             <header><h1>Vim ile Zorunlu Hareketler 1</h1></header>
             
             
             <section><h2>Dosya açmak</h2>
-<pre><code>    $ vim index.html
-</code></pre>
+<div class="highlight"><pre><span class="nv">$ </span>vim index.html
+</pre></div>
+
 <p>ile bulunduğumuz dizinde index.html adında bir dosya açtık.</p>
 <p>Dosya adını belirtmeden yine terminalden</p>
-<pre><code>    $ vim
-</code></pre>
+<div class="highlight"><pre><span class="nv">$ </span>vim
+</pre></div>
+
 <p>ile programa giriş yapıp escape modunda</p>
-<pre><code>    :w index.html
-</code></pre>
+<div class="highlight"><pre>:w index.html
+</pre></div>
+
 <p>yazarak da dosyamızı index.html olarak kaydetmiş oluyoruz.</p></section>
             
           </div>
@@ -1805,7 +1998,7 @@ Unix tabanlı hemen hemen her sistemde bulunur.</p></section>
             </aside>
             
             <aside class="page_number">
-              11/19
+              11/18
             </aside>
           </footer>
         </div>
@@ -1852,7 +2045,7 @@ yapacağız. Biraz önce vim ile açtığımız index.html dosyasında</p>
             </aside>
             
             <aside class="page_number">
-              12/19
+              12/18
             </aside>
           </footer>
         </div>
@@ -1890,7 +2083,7 @@ Ancak bu görevi yapan <code>hjkl</code> tuşlarını kullanmaya alışırsak ed
             </aside>
             
             <aside class="page_number">
-              13/19
+              13/18
             </aside>
           </footer>
         </div>
@@ -1905,12 +2098,12 @@ Ancak bu görevi yapan <code>hjkl</code> tuşlarını kullanmaya alışırsak ed
             
             
             <section><p>index.html dosyamız ve bu dosyamızda aşağıdaki gibi kodlarımız olsun:</p>
-<div class="highlight"><pre><span class="lineno">1</span> <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;landslide&quot;</span><span class="nt">&gt;</span>
-<span class="lineno">2</span>     <span class="nt">&lt;header&gt;&lt;h2&gt;</span>foo<span class="nt">&lt;/h2&gt;&lt;/header&gt;</span>
-<span class="lineno">3</span>     <span class="nt">&lt;section&gt;</span>
-<span class="lineno">4</span>         <span class="nt">&lt;p&gt;</span>su gibi berrak ol evladım!<span class="nt">&lt;/p&gt;</span>
-<span class="lineno">5</span>     <span class="nt">&lt;/section&gt;</span>
-<span class="lineno">6</span> <span class="nt">&lt;/div&gt;</span>
+<div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;landslide&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;header&gt;&lt;h2&gt;</span>foo<span class="nt">&lt;/h2&gt;&lt;/header&gt;</span>
+    <span class="nt">&lt;section&gt;</span>
+        <span class="nt">&lt;p&gt;</span>su gibi berrak ol evladım!<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;/section&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
 </pre></div>
 
 <p>Dosya içerisindeyken insert modu ile çeşitli eklemeler düzenlemeler yaptık.</p>
@@ -1939,7 +2132,7 @@ Ancak bu görevi yapan <code>hjkl</code> tuşlarını kullanmaya alışırsak ed
             </aside>
             
             <aside class="page_number">
-              14/19
+              14/18
             </aside>
           </footer>
         </div>
@@ -1954,15 +2147,15 @@ Ancak bu görevi yapan <code>hjkl</code> tuşlarını kullanmaya alışırsak ed
             
             
             <section><p>Visual mod yani görsel mod sayesinde birden fazla satır üzerinde işlemler yapabiliyoruz.</p>
-<div class="highlight"><pre><span class="lineno">1</span> <span class="kn">import</span> <span class="nn">landslide</span>
-<span class="lineno">2</span> 
-<span class="lineno">3</span> <span class="k">class</span> <span class="nc">MyMacro</span><span class="p">(</span><span class="n">Macro</span><span class="p">):</span>
-<span class="lineno">4</span>     <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-<span class="lineno">5</span>         <span class="k">return</span> <span class="n">content</span> <span class="o">+</span> <span class="s">&#39;&lt;p&gt;hop&lt;/p&gt;&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;hop_slide&#39;</span><span class="p">]</span>
-<span class="lineno">6</span> 
-<span class="lineno">7</span> <span class="n">g</span> <span class="o">=</span> <span class="n">generator</span><span class="o">.</span><span class="n">Generator</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s">&#39;slide.md&#39;</span><span class="p">)</span>
-<span class="lineno">8</span> <span class="n">g</span><span class="o">.</span><span class="n">register_macro</span><span class="p">(</span><span class="n">MyMacro</span><span class="p">)</span>
-<span class="lineno">9</span> <span class="k">print</span> <span class="n">g</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">landslide</span>
+
+<span class="k">class</span> <span class="nc">MyMacro</span><span class="p">(</span><span class="n">Macro</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">content</span> <span class="o">+</span> <span class="s">&#39;&lt;p&gt;hop&lt;/p&gt;&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;hop_slide&#39;</span><span class="p">]</span>
+
+<span class="n">g</span> <span class="o">=</span> <span class="n">generator</span><span class="o">.</span><span class="n">Generator</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s">&#39;slide.md&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">register_macro</span><span class="p">(</span><span class="n">MyMacro</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">g</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
 </pre></div>
 
 <p>örneğin</p>
@@ -1990,7 +2183,7 @@ Ancak bu görevi yapan <code>hjkl</code> tuşlarını kullanmaya alışırsak ed
             </aside>
             
             <aside class="page_number">
-              15/19
+              15/18
             </aside>
           </footer>
         </div>
@@ -2007,12 +2200,17 @@ Ancak bu görevi yapan <code>hjkl</code> tuşlarını kullanmaya alışırsak ed
             <section><p>Visual-Block modun Visual moddan farkı blok seçim yapabilmesidir.</p>
 <p>Hemen bir önceki sayfadaki kod üzerinde deneme yapalım.</p>
 <ul>
-<li>kod üzerine gelip ctrl + v tuş kombinasyonuyla visual-block moduna geçelim</li>
-<li>arkasından visual moddaki gibi seçim yapalım</li>
-</ul>
-<p><code>Burda görmemiz gereken farklılık visual moddaki birden fazla satır seçebilme durumumuzdur</code></p>
-<ul>
-<li>Visual mod seçeceğimiz satırların tümünü seçmemizi sağlıyordu</li>
+<li>Kod üzerine gelip ctrl + v tuş kombinasyonuyla visual-block moduna geçelim</li>
+<li>
+<p>Arkasından visual moddaki gibi seçim yapalım</p>
+<pre><code>burda görmemiz gereken farklılık
+visual moddaki birden fazla satır
+block halinde seçebilme durumumuzdur
+</code></pre>
+</li>
+<li>
+<p>Visual mod seçeceğimiz satırların tümünü seçmemizi sağlıyordu</p>
+</li>
 <li>Visual-block mod ise bize istediğimiz bir grup satırın istediğimiz kısımlarını seçmemizi sağlar</li>
 </ul></section>
             
@@ -2030,7 +2228,7 @@ Ancak bu görevi yapan <code>hjkl</code> tuşlarını kullanmaya alışırsak ed
             </aside>
             
             <aside class="page_number">
-              16/19
+              16/18
             </aside>
           </footer>
         </div>
@@ -2038,27 +2236,28 @@ Ancak bu görevi yapan <code>hjkl</code> tuşlarını kullanmaya alışırsak ed
       
       <!-- slide source: ./index.md -->
       <div class="slide-wrapper">
-        <div class="slide">
+        <div class="slide has_code">
           <div class="inner">
             
             <header><h1>Dosya Üzerinde Silme ve Geri Alma</h1></header>
             
             
-            <section><h3>silme</h3>
+            <section><h3>Silme</h3>
 <ul>
 <li>Escape modunda iken delete tuşu ile harf harf silebiliriz.</li>
 <li>Aynı şekilde yine karakter karakter silmek için x tuşu kullanılabilir be kullanılmalıdır.</li>
 <li>Visual veya Visual-Block modu ile toplu seçimlerimizde yine delete tuşu ile silebiliriz.</li>
 <li>dd tuşları ile de seçtiğimiz kısmı veya üzerinde bulunduğumuz satırı keserek de ordan kaldırmış oluruz.</li>
 </ul>
-<h3>geri alma</h3>
+<h3>Geri alma</h3>
 <p>sadece silme işlemlerinde değil kopyalama, yapıştırma, kesme gibi bir çok işlemi geri almak istediğinizde</p>
 <ul>
-<li>önce escape moduna geçip</li>
+<li>Önce escape moduna geçip</li>
 <li>
-<p>arkasından command modda</p>
-<pre><code>:u
-</code></pre>
+<p>Arkasından command modda</p>
+<div class="highlight"><pre>:u
+</pre></div>
+
 <p>ile en son işleminizi geri alıp dosyanızı bir işlem önceki haline getirebilirsiniz.</p>
 </li>
 </ul></section>
@@ -2077,7 +2276,7 @@ Ancak bu görevi yapan <code>hjkl</code> tuşlarını kullanmaya alışırsak ed
             </aside>
             
             <aside class="page_number">
-              17/19
+              17/18
             </aside>
           </footer>
         </div>
@@ -2107,40 +2306,7 @@ Ancak bu görevi yapan <code>hjkl</code> tuşlarını kullanmaya alışırsak ed
             </aside>
             
             <aside class="page_number">
-              18/19
-            </aside>
-          </footer>
-        </div>
-      </div>
-      
-      <!-- slide source: ./index.md -->
-      <div class="slide-wrapper">
-        <div class="slide">
-          <div class="inner">
-            
-            <header><h1>19 Organizasyonu</h1></header>
-            
-            
-            <section><h2><a href="http://ondokuz.biz">19 Organizasyonu</a></h2>
-<p><a href="http://emineker.net/">http://emineker.net/</a></p>
-<p><strong>Sunum hakkında ayrıntılı bilgi almak için</strong> <a href="http://ondokuz.biz/perde/">http://ondokuz.biz/p</a> adresini ziyaret edebilirsiniz.</p>
-<p><img alt="19" src="data:image/png;base64,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" /></p></section>
-            
-          </div>
-          <div class="presenter_notes">
-            <header><h1>Presenter Notes</h1></header>
-            <section>
-            
-            </section>
-          </div>
-          <footer>
-            
-            <aside class="source">
-              Source: <a href="./index.md">./index.md</a>
-            </aside>
-            
-            <aside class="page_number">
-              19/19
+              18/18
             </aside>
           </footer>
         </div>
@@ -2259,12 +2425,6 @@ Ancak bu görevi yapan <code>hjkl</code> tuşlarını kullanmaya alışırsak ed
       <tr id="toc-row-18">
         <th><a href="#slide18">Devamı gelecek</a></th>
         <td><a href="#slide18">18</a></td>
-      </tr>
-      
-      
-      <tr id="toc-row-19">
-        <th><a href="#slide19">19 Organizasyonu</a></th>
-        <td><a href="#slide19">19</a></td>
       </tr>
       
       
