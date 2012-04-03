@@ -14,6 +14,8 @@ CONFIG = Config.fetch('presentation', {})
 PRESENTATION_DIR = CONFIG.fetch('directory', 'p')
 # Öntanımlı landslide yapılandırması
 DEFAULT_CONFFILE = CONFIG.fetch('conffile', '_templates/presentation.cfg')
+# Öntanımlı landslide javascript dosyası
+DEFAULT_JSFILE = CONFIG.fetch('conffile', 'assets/presentation.js')
 # Sunum indeksi
 INDEX_FILE = File.join(PRESENTATION_DIR, 'index.html')
 # İzin verilen en büyük resim boyutları
@@ -34,6 +36,9 @@ TASKS = {
     :optim   => 'resimleri iyileştir',
     :default => 'öntanımlı görev',
 }
+
+# ERB şablonları için
+BINDING = binding
 
 # Sunum bilgileri
 presentation   = {}
@@ -115,12 +120,41 @@ def optim
   end
 end
 
+# ------------------------------------------------------------------------------
+# Ana kod
+# ------------------------------------------------------------------------------
+
 # Alt dizinlerde yapılandırma dosyasına mutlak dosya yoluyla erişiyoruz
 default_conffile = File.expand_path(DEFAULT_CONFFILE)
+
+new_files = %w(assets/my.css assets/my.js)
+js_template = File.join('_templates', File.basename(DEFAULT_JSFILE)) + '.erb'
+
+if File.exists? js_template
+  file DEFAULT_JSFILE => [js_template, '_config.yml'] do |t|
+    content = ERB.new(File.read(t.prerequisites[0])).result(BINDING)
+    isnew = ! File.exists?(t.name)
+    File.open(t.name, 'w') { |f| f.write content }
+    cry "yeni dosya: '#{t.name}'; 'git add' ile depoya eklemeyi unutmayın" if isnew
+  end
+else
+    new_files << DEFAULT_JSFILE
+end
+
+new_files.each do |f|
+  unless File.exists? f
+    %x(touch #{f})
+    cry "yeni dosya: '#{f}'; 'git add' ile depoya eklemeyi unutmayın"
+  end
+end
 
 # Sunum bilgilerini üret
 FileList[File.join(PRESENTATION_DIR, "[^_.]*")].each do |dir|
   next unless File.directory?(dir)
+  deps = []
+
+  deps << default_conffile
+
   chdir dir do
     name = File.basename(dir)
     conffile = File.exists?('presentation.cfg') ? 'presentation.cfg' : default_conffile
@@ -130,13 +164,11 @@ FileList[File.join(PRESENTATION_DIR, "[^_.]*")].each do |dir|
 
     landslide = config['landslide']
     if ! landslide
-      $stderr.puts "#{dir}: 'landslide' bölümü tanımlanmamış"
-      exit 1
+      die "#{dir}: 'landslide' bölümü tanımlanmamış"
     end
 
     if landslide['destination']
-      $stderr.puts "#{dir}: 'destination' ayarı kullanılmış; hedef dosya belirtilmeyin"
-      exit 1
+      die "#{dir}: 'destination' ayarı kullanılmış; hedef dosya belirtilmeyin"
     end
 
     if File.exists?('index.md')
@@ -148,8 +180,7 @@ FileList[File.join(PRESENTATION_DIR, "[^_.]*")].each do |dir|
       base = 'presentation'
       ispublic = false
     else
-      $stderr.puts "#{dir}: sunum kaynağı 'presentation.md' veya 'index.md' olmalı"
-      exit 1
+      die "#{dir}: sunum kaynağı 'presentation.md' veya 'index.md' olmalı"
     end
 
     basename = base + '.html'
@@ -157,9 +188,11 @@ FileList[File.join(PRESENTATION_DIR, "[^_.]*")].each do |dir|
     target = File.to_herepath(basename)
 
     # bağımlılık verilecek tüm dosyaları listele
-    deps = []
-    (DEPEND_ALWAYS + landslide.values_at(*DEPEND_KEYS)).compact.each do |v|
+    DEPEND_ALWAYS.compact.each do |v|
       deps += v.split.select { |p| File.exists?(p) }.map { |p| File.to_filelist(p) }.flatten
+    end
+    landslide.values_at(*DEPEND_KEYS).compact.each do |v|
+      deps += v.split.map { |p| File.to_filelist(p) }.flatten
     end
 
     # eklenen kod dosyalarını da bağımlılıklara ekle
@@ -265,7 +298,7 @@ presentation.each do |presentation, data|
       if File.exists?(data[:target])
         %x(#{browse_command data[:target]})
       else
-        $stderr.puts "#{data[:target]} bulunamadı; önce inşa edin"
+        cry "#{data[:target]} bulunamadı; önce inşa edin"
       end
     end
 
@@ -298,7 +331,7 @@ namespace :p do
     task name[0] => name
   end
 
-  task :build do
+  task :index do
     index = YAML.load_file(INDEX_FILE) || {}
     presentations = presentation.values.select { |v| v[:public] }.map { |v| v[:directory] }.sort
     unless index and presentations == index['presentations']
@@ -308,6 +341,10 @@ namespace :p do
         f.write("---\n")
       end
     end
+  end
+
+  task :build do
+    Rake::Task["p:index"].invoke
   end
 
   desc "sunum menüsü"
