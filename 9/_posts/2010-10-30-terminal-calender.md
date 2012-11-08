@@ -1,6 +1,6 @@
 ---
 layout: post
-title: terminalde tarih işlemleri
+title: Terminalde Takvim İşlemleri
 ---
 
 konsoldan tarih bilgilerine ulaşabileceğiniz süper bir program: cal
