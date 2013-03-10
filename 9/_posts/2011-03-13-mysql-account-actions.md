@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Mysql Kullanıcı Oluşturma Silme İşlemleri
+title: mysql kullanıcı oluşturma silme işlemleri
 ---
 
 mysql veritabanını bağlanabilmek ve onu kullanabilmek için bir kullanıcı hesabı oluşturulmalıdır. mysql kullanıcı hesabı oluşturmak için kullanılan komut GRANT’tır. Bu komut ile kullanıcı hesabı oluştururken sunucunun üzerinde çalıştığı host ismide belirtilebilir. Eğer bu tür bağlantı parametreleri belirtilmezse mysql varsayılan değerleri alacaktır. Örneğin, eğer host adı belirtilmezse mysql sunucunun yerel host üzerinde çalıştığını varsayacaktır
@@ -56,7 +56,7 @@ satırı ile yeni_DB üzerinde sadece select, insert, update ve delete işlemler
 
 şeklinde verecek tanımlayacak olursak oluşturulan yeni kullanıcı yeni_DB üzerinde tüm işlemleri gerçekleştirebilir
 NOT: bu kısımda kullanıcı hesabı oluşturma ve veritabanıyla ilişkilendirme işlemi aynı anda gerçekleştirilir.
- 
+
 mysql üzerinde yeni bir kullanıcı hesabı açma işlemleri bu şekilde şimdi de silme işlemine bakalım
 
         mysql> drop user kullanici;
