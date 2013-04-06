@@ -12,7 +12,7 @@ adımları takip edebilirsiniz
 
 - dalı yedekle
 
-        $ git co -t -b foo origin/foo
+        $ git checkout -t -b foo origin/foo
         $ git branch -M foo bar
 
 
@@ -25,7 +25,7 @@ adımları takip edebilirsiniz
 
         $ git symbolic-ref HEAD refs/heads/foo
         $ rm -f .git/index
-        $ git clean fdx
+        $ git clean -fdx
 
 **Dikkat:** son satırdaki komut depodaki git tarafından takip edilmeyen tüm dosyaları siler
 
