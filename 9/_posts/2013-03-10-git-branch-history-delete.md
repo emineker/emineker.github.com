@@ -21,9 +21,13 @@ adımları takip edebilirsiniz
         $ git push origin :foo
 
 
-- ebeveyni olmayan yeni bir dal oluştur (bro: branch orphaned)
+- ebeveyni olmayan yeni bir dal oluştur
 
-        $ git bro foo
+        $ git symbolic-ref HEAD refs/heads/foo
+        $ rm -f .git/index
+        $ git clean fdx
+
+**Dikkat:** son satırdaki komut depodaki git tarafından takip edilmeyen tüm dosyaları siler
 
 
 - yeni dalı ilkle
