@@ -22,6 +22,7 @@ facebook: ~
 feed: ~
 flickr: ~
 google: ~
+domain: emineker.net
 googleanalyticsid: UA-40135421-1
 googleplus: 110754783365796157780
 gpg: ~
@@ -33,7 +34,7 @@ related: Diğer Girdiler
 repository: emineker.github.com
 ribbon: GitHub'dayım
 title: Emin Eker
-twitter: ~
+twitter: http://twitter.com/emineker
 
 navigator:
         0: Teknik Olmayan Yazılar
